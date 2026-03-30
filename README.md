@@ -44,7 +44,7 @@ https://sasmikayapa.github.io/safetravel-lk/
 
 ## Author
 Sithum Yapa  
-Undergraduate – Engineering / Data Science / GIS  
+Undergraduate – Data Science and Business Analytics  
 Sri Lanka
 
 ---
