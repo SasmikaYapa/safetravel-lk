@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeTravel LK — Women's Safety Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #C0392B;
+    --rose: #E8475F;
+    --gold: #F0A500;
+    --cream: #FDF6EC;
+    --deep: #1A0A0E;
+    --mid: #3D1A22;
+    --muted: #8B6070;
+    --light-rose: #FDE8ED;
+    --white: #FFFFFF;
+    --green: #27AE60;
+    --teal: #1ABC9C;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--deep) 0%, var(--mid) 50%, #5C1A2A 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 30%, rgba(232,71,95,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(240,165,0,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Floating petals */
+  .petal {
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+    opacity: 0.12;
+    animation: drift linear infinite;
+  }
+  @keyframes drift {
+    0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+    10%  { opacity: 0.15; }
+    90%  { opacity: 0.1; }
+    100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+  }
+
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(26,10,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,71,95,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--rose);
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-sos {
+    background: var(--rose);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    animation: pulse-sos 2s ease-in-out infinite;
+    text-decoration: none;
+  }
+  @keyframes pulse-sos {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232,71,95,0.5); }
+    50%       { box-shadow: 0 0 0 10px rgba(232,71,95,0); }
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 800px;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(232,71,95,0.2);
+    border: 1px solid rgba(232,71,95,0.4);
+    color: var(--rose);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--rose), var(--crimson));
+    color: white;
+    border: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(232,71,95,0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(232,71,95,0.55);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: var(--rose);
+    color: var(--rose);
+    transform: translateY(-2px);
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    background: var(--rose);
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+    color: white;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 5rem 2rem; }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--light-rose);
+    color: var(--rose);
+    padding: 0.25rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--deep);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* ── EMERGENCY NUMBERS ── */
+  .emergency {
+    background: var(--deep);
+    padding: 5rem 2rem;
+  }
+
+  .emergency-grid {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .e-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(232,71,95,0.2);
+    border-radius: 16px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  .e-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--rose);
+  }
+  .e-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,71,95,0.07), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .e-card:hover::before { opacity: 1; }
+
+  .e-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .icon-red   { background: rgba(192,57,43,0.2);  }
+  .icon-rose  { background: rgba(232,71,95,0.2);  }
+  .icon-gold  { background: rgba(240,165,0,0.2);  }
+  .icon-teal  { background: rgba(26,188,156,0.2); }
+  .icon-green { background: rgba(39,174,96,0.2);  }
+
+  .e-org {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .e-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .e-number {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .e-num-badge {
+    background: var(--rose);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .e-num-badge:hover { background: var(--crimson); }
+
+  .e-num-badge.gold  { background: var(--gold); color: var(--deep); }
+  .e-num-badge.teal  { background: var(--teal); }
+  .e-num-badge.green { background: var(--green); }
+
+  .e-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    margin-top: 0.8rem;
+  }
+
+  /* ── REPORT FORM ── */
+  .report-section {
+    background: linear-gradient(170deg, var(--cream) 0%, #FAE8EE 100%);
+  }
+
+  .report-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .report-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .stats-strip { gap: 2rem; }
+  }
+
+  .report-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 1.5rem;
+  }
+
+  .report-steps {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  .report-steps li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(192,57,43,0.1);
+  }
+  .step-num {
+    background: var(--rose);
+    color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-text strong { display: block; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .step-text span { font-size: 0.82rem; color: var(--muted); }
+
+  .privacy-note {
+    background: rgba(39,174,96,0.08);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 0.82rem;
+    color: #1a6b3e;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(192,57,43,0.1);
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.3rem;
+  }
+  .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.8rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--mid);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.3px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #E8D5DA;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: var(--cream);
+    color: var(--deep);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(232,71,95,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .type-btn {
+    border: 1.5px solid #E8D5DA;
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    color: var(--mid);
+  }
+  .type-btn:hover, .type-btn.active {
+    border-color: var(--rose);
+    background: var(--light-rose);
+    color: var(--rose);
+    font-weight: 600;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--rose), var(--crimson));
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(232,71,95,0.35);
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(232,71,95,0.45);
+  }
+
+  /* ── SUCCESS TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--green);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(39,174,96,0.4);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── PHOTO GALLERY ── */
+  .gallery-section {
+    background: var(--deep);
+    padding: 5rem 2rem;
+  }
+
+  .gallery-header {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+  .gallery-header .section-title { color: white; }
+  .gallery-header .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto; }
+
+  .gallery-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: var(--mid);
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .gallery-item.tall { grid-row: span 2; aspect-ratio: unset; }
+
+  .gallery-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--mid), #4A1A28);
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-img-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,71,95,0.15), transparent);
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(26,10,14,0.85));
+    padding: 2rem 1.2rem 1rem;
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.tall { aspect-ratio: 4/3; grid-row: span 1; }
+  }
+
+  /* ── TRANSPORT TYPES ── */
+  .transport-section {
+    background: var(--cream);
+  }
+
+  .transport-cards {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .transport-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    cursor: pointer;
+  }
+  .transport-card:hover {
+    border-color: var(--rose);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(232,71,95,0.15);
+  }
+
+  .t-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+  .t-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.3rem;
+  }
+  .t-info { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  .t-risk {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .risk-high   { background: rgba(192,57,43,0.12); color: var(--crimson); }
+  .risk-medium { background: rgba(240,165,0,0.15);  color: #B07A00; }
+  .risk-low    { background: rgba(39,174,96,0.12);  color: #1a6b3e; }
+
+  /* ── RIGHTS ── */
+  .rights-section {
+    background: linear-gradient(170deg, #FAE8EE 0%, var(--cream) 100%);
+  }
+
+  .rights-grid {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .right-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border-left: 4px solid var(--rose);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .right-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .right-body { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--rose); }
+  footer a { color: var(--rose); text-decoration: none; }
+
+  /* ── SOS MODAL ── */
+  .sos-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,10,14,0.95);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .sos-overlay.open { display: flex; }
+
+  .sos-modal {
+    background: var(--mid);
+    border: 2px solid var(--rose);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .sos-pulse {
+    width: 80px; height: 80px;
+    background: var(--rose);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    animation: pulse-big 1s ease-in-out infinite;
+  }
+  @keyframes pulse-big {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232,71,95,0.6); }
+    50%       { box-shadow: 0 0 0 20px rgba(232,71,95,0); }
+  }
+
+  .sos-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: white; margin-bottom: 0.5rem; }
+  .sos-sub   { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-bottom: 2rem; }
+
+  .sos-numbers { list-style: none; text-align: left; margin-bottom: 2rem; }
+  .sos-numbers li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    background: rgba(255,255,255,0.05);
+    color: white;
+  }
+  .sos-numbers li span { font-size: 0.85rem; }
+  .sos-numbers li a {
+    background: var(--rose);
+    color: white;
+    text-decoration: none;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .sos-numbers li a:hover { background: var(--crimson); }
+
+  .sos-close {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(255,255,255,0.6);
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .sos-close:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  /* Section alignment helper */
+  .center { text-align: center; }
+  .max-w { max-width: 1100px; margin: 0 auto; }
+  .mt-3 { margin-top: 3rem; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Safe<span>Travel</span> LK</div>
+  <ul class="nav-links">
+    <li><a href="#emergency">Emergency</a></li>
+    <li><a href="#report">File Report</a></li>
+    <li><a href="#rights">Your Rights</a></li>
+    <li><a href="#transport">Transport Info</a></li>
+  </ul>
+  <a class="nav-sos" onclick="openSOS()">🆘 SOS</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Petals -->
+  <div class="petal" style="width:40px;height:40px;background:#E8475F;left:8%;animation-duration:12s;animation-delay:0s;"></div>
+  <div class="petal" style="width:25px;height:25px;background:#F0A500;left:25%;animation-duration:16s;animation-delay:3s;"></div>
+  <div class="petal" style="width:55px;height:55px;background:#C0392B;left:60%;animation-duration:10s;animation-delay:1s;"></div>
+  <div class="petal" style="width:30px;height:30px;background:#E8475F;left:80%;animation-duration:14s;animation-delay:5s;"></div>
+  <div class="petal" style="width:20px;height:20px;background:#F0A500;left:45%;animation-duration:18s;animation-delay:7s;"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">🇱🇰 Sri Lanka · Women's Safety Initiative</div>
+    <h1>Your Voice<br><em>Deserves</em> to be Heard</h1>
+    <p class="hero-sub">A safe, confidential platform for women to report harassment on Sri Lanka's public transport — buses, trains, and three-wheelers. Every complaint matters. Every woman matters.</p>
+    <div class="hero-ctas">
+      <a href="#report" class="btn-primary">📝 File a Complaint</a>
+      <a onclick="openSOS()" class="btn-outline" style="cursor:pointer">🆘 Emergency Numbers</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">90%</div>
+    <div class="stat-label">Women harassed on public transport</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3M+</div>
+    <div class="stat-label">Daily public transport users</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4%</div>
+    <div class="stat-label">Who actually report — let's change this</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Helplines available</div>
+  </div>
+</div>
+
+<!-- EMERGENCY NUMBERS -->
+<section class="emergency" id="emergency">
+  <div class="max-w center reveal">
+    <span class="section-tag" style="background:rgba(232,71,95,0.15);color:var(--rose)">Emergency & Helplines</span>
+    <h2 class="section-title" style="color:white">Call Now — You Are Not Alone</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.5);margin:0 auto">Official hotlines and support organisations available to help you. All calls are treated with confidentiality.</p>
+  </div>
+
+  <div class="emergency-grid reveal">
+
+    <div class="e-card">
+      <div class="e-icon icon-red">🚨</div>
+      <div class="e-org">Sri Lanka Police</div>
+      <div class="e-name">Police Emergency</div>
+      <div class="e-number">
+        <a href="tel:119" class="e-num-badge">119</a>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.8rem">24 hrs</span>
+      </div>
+      <p class="e-desc">National police emergency line for immediate danger. Call this if you are being harassed right now.</p>
+    </div>
+
+    <div class="e-card">
+      <div class="e-icon icon-rose">👮‍♀️</div>
+      <div class="e-org">Sri Lanka Police — CWB</div>
+      <div class="e-name">Children & Women Bureau Hotline</div>
+      <div class="e-number">
+        <a href="tel:0112444444" class="e-num-badge">011-2444444</a>
+      </div>
+      <div class="e-number">
+        <a href="tel:109" class="e-num-badge">109</a>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.8rem">Emergency</span>
+      </div>
+      <p class="e-desc">Bureau for Prevention of Abuse of Children & Women. Public Complaint Desk operating 24 hours. Located in Grandpass Road, Colombo 14.</p>
+    </div>
+
+    <div class="e-card">
+      <div class="e-icon icon-gold">🚌</div>
+      <div class="e-org">National Transport Commission</div>
+      <div class="e-name">NTC Transport Complaints</div>
+      <div class="e-number">
+        <a href="tel:1955" class="e-num-badge gold">1955</a>
+      </div>
+      <p class="e-desc">Report harassment by bus drivers or conductors. The NTC prioritises women's complaints and takes disciplinary action against perpetrators.</p>
+    </div>
+
+    <div class="e-card">
+      <div class="e-icon icon-rose">💜</div>
+      <div class="e-org">Ministry — Women's Affairs</div>
+      <div class="e-name">Women's Help Line</div>
+      <div class="e-number">
+        <a href="tel:1938" class="e-num-badge">1938</a>
+      </div>
+      <p class="e-desc">Ministry of Child Development & Women's Affairs helpline. For support, counselling, and guidance on women's issues including harassment.</p>
+    </div>
+
+    <div class="e-card">
+      <div class="e-icon icon-teal">🤝</div>
+      <div class="e-org">Women In Need (WIN)</div>
+      <div class="e-name">24-Hour Caller Hotline</div>
+      <div class="e-number">
+        <a href="tel:0117762517" class="e-num-badge teal">011-7762517</a>
+      </div>
+      <p class="e-desc">Sri Lanka's leading organisation for eliminating gender-based violence. Offers legal services, psychological counselling, emergency shelters, and a 2SIX4 safety app.</p>
+    </div>
+
+    <div class="e-card">
+      <div class="e-icon icon-green">📧</div>
+      <div class="e-org">NTC — Email Complaints</div>
+      <div class="e-name">Anonymous Email Report</div>
+      <div class="e-number">
+        <a href="mailto:chairman@ntc.gov.lk" class="e-num-badge green" style="font-size:0.85rem;font-family:'DM Sans',sans-serif;letter-spacing:0;padding:0.3rem 0.6rem;">Email NTC</a>
+      </div>
+      <p class="e-desc">Prefer not to call? Email <span style="color:var(--rose)">chairman@ntc.gov.lk</span> to report anonymously. Your identity can be kept confidential.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header reveal">
+    <span class="section-tag" style="background:rgba(232,71,95,0.15);color:var(--rose)">Real Stories · Real Impact</span>
+    <h2 class="section-title">Women of Sri Lanka<br>Deserve Safe Journeys</h2>
+    <p class="section-sub">Every day, millions of women rely on public transport to reach their schools, workplaces, and families. Their safety is not optional.</p>
+  </div>
+
+  <div class="gallery-grid reveal">
+
+    <div class="gallery-item tall">
+      <div class="gallery-img-placeholder" style="min-height:100%">
+        <!-- SVG illustration: women commuting -->
+        <svg width="100%" height="100%" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#5C1A2A"/>
+              <stop offset="100%" style="stop-color:#1A0A0E"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="500" fill="url(#g1)"/>
+          <!-- Bus outline -->
+          <rect x="30" y="280" width="240" height="120" rx="12" fill="none" stroke="rgba(232,71,95,0.5)" stroke-width="2"/>
+          <rect x="30" y="280" width="240" height="40" rx="8" fill="rgba(232,71,95,0.15)"/>
+          <!-- Windows -->
+          <rect x="50"  y="295" width="35" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+          <rect x="100" y="295" width="35" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+          <rect x="150" y="295" width="35" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+          <rect x="200" y="295" width="35" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+          <!-- Wheels -->
+          <circle cx="80"  cy="408" r="18" fill="rgba(255,255,255,0.05)" stroke="rgba(232,71,95,0.4)" stroke-width="2"/>
+          <circle cx="210" cy="408" r="18" fill="rgba(255,255,255,0.05)" stroke="rgba(232,71,95,0.4)" stroke-width="2"/>
+          <!-- Woman silhouette -->
+          <circle cx="150" cy="130" r="28" fill="rgba(232,71,95,0.6)"/>
+          <path d="M110 230 Q150 190 190 230 L195 270 H105 Z" fill="rgba(232,71,95,0.4)"/>
+          <!-- Sari drape suggestion -->
+          <path d="M120 220 Q140 240 125 270" stroke="rgba(240,165,0,0.5)" stroke-width="3" fill="none"/>
+          <!-- Text -->
+          <text x="150" y="460" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="Georgia">Safe journey is a right, not a privilege</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Women make up half of Sri Lanka's 3 million daily commuters</div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img-placeholder">
+        <svg width="100%" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+          <rect width="280" height="200" fill="#2A0D14"/>
+          <!-- Train -->
+          <rect x="20" y="60" width="240" height="90" rx="10" fill="rgba(232,71,95,0.12)" stroke="rgba(232,71,95,0.3)" stroke-width="1.5"/>
+          <rect x="20" y="60" width="240" height="30" rx="6" fill="rgba(232,71,95,0.2)"/>
+          <rect x="40"  y="70" width="30" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="85"  y="70" width="30" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="130" y="70" width="30" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="175" y="70" width="30" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <!-- Rail -->
+          <line x1="0" y1="155" x2="280" y2="155" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+          <text x="140" y="178" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="Georgia">Sri Lanka Railways</text>
+          <!-- Shield icon -->
+          <text x="140" y="125" text-anchor="middle" font-size="22">🛡️</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Sri Lanka Railways — report via Women & Children Bureau: 011-2444444</div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img-placeholder">
+        <svg width="100%" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+          <rect width="280" height="200" fill="#1A0A0E"/>
+          <!-- Big stat -->
+          <text x="140" y="90" text-anchor="middle" fill="rgba(232,71,95,0.8)" font-size="56" font-family="Georgia" font-weight="900">90%</text>
+          <text x="140" y="115" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="11" font-family="Arial">of women face harassment</text>
+          <text x="140" y="132" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="11" font-family="Arial">on public transport</text>
+          <text x="140" y="155" text-anchor="middle" fill="rgba(240,165,0,0.6)" font-size="9" font-family="Arial">Source: UNFPA Sri Lanka Study</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">UNFPA study: 90% of Sri Lankan women harassed on public transport</div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img-placeholder">
+        <svg width="100%" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+          <rect width="280" height="200" fill="#2A0D14"/>
+          <!-- Three-wheeler / tuk tuk -->
+          <ellipse cx="140" cy="130" rx="90" ry="50" fill="rgba(240,165,0,0.1)" stroke="rgba(240,165,0,0.3)" stroke-width="1.5"/>
+          <rect x="90" y="90" width="100" height="50" rx="8" fill="rgba(240,165,0,0.15)"/>
+          <circle cx="100" cy="148" r="15" fill="rgba(240,165,0,0.1)" stroke="rgba(240,165,0,0.4)" stroke-width="1.5"/>
+          <circle cx="180" cy="148" r="15" fill="rgba(240,165,0,0.1)" stroke="rgba(240,165,0,0.4)" stroke-width="1.5"/>
+          <rect x="120" y="80" width="40" height="18" rx="4" fill="rgba(240,165,0,0.2)"/>
+          <text x="140" y="115" text-anchor="middle" font-size="18">🛺</text>
+          <text x="140" y="172" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="Arial">Three-wheeler safety tips below</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Always note the vehicle registration number before boarding</div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img-placeholder">
+        <svg width="100%" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+          <rect width="280" height="200" fill="#1A0A0E"/>
+          <!-- Phone with app -->
+          <rect x="100" y="25" width="80" height="150" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(26,188,156,0.4)" stroke-width="1.5"/>
+          <rect x="108" y="40" width="64" height="100" rx="6" fill="rgba(26,188,156,0.08)"/>
+          <text x="140" y="100" text-anchor="middle" font-size="24">📱</text>
+          <text x="140" y="120" text-anchor="middle" fill="rgba(26,188,156,0.8)" font-size="10" font-family="Arial">2SIX4 Safety App</text>
+          <text x="140" y="138" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Arial">by Women In Need Sri Lanka</text>
+          <circle cx="140" cy="165" r="5" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+      </div>
+      <div class="gallery-caption">2SIX4 app by WIN — one-tap SOS to contacts & nearest police</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REPORT FORM -->
+<section class="report-section" id="report">
+  <div class="report-layout">
+    <div class="report-info reveal">
+      <span class="section-tag">File Your Report</span>
+      <h2 class="section-title">Your Complaint<br>Creates Change</h2>
+      <p class="section-sub" style="margin-bottom:2rem">Reporting helps authorities identify problem routes, take action against perpetrators, and protect other women. Only 4% of women report — be part of the change.</p>
+
+      <h3>How it works</h3>
+      <ul class="report-steps">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Fill the form</strong>
+            <span>Share details of what happened — as much or as little as you're comfortable with.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Submit & receive ID</strong>
+            <span>You'll get a complaint reference number to track your case.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Authorities act</strong>
+            <span>Your report is forwarded to the relevant authority — NTC, Police CWB, or Railways.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>Follow-up support</strong>
+            <span>Optional counselling and legal guidance available through WIN Sri Lanka.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="privacy-note">
+        <span>🔒</span>
+        <span>Your identity is fully protected. You may choose to remain anonymous. All reports are encrypted and handled by trained officers.</span>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <div class="form-title">Report an Incident</div>
+      <div class="form-sub">All fields marked * are required. You may skip others.</div>
+
+      <div id="incidentTypeGroup" class="form-group">
+        <label>Type of Incident *</label>
+        <div class="type-grid">
+          <button class="type-btn" onclick="selectType(this)">🤚 Physical Harassment</button>
+          <button class="type-btn" onclick="selectType(this)">🗣️ Verbal Abuse</button>
+          <button class="type-btn" onclick="selectType(this)">👁️ Leering / Stalking</button>
+          <button class="type-btn" onclick="selectType(this)">📸 Photography</button>
+          <button class="type-btn" onclick="selectType(this)">🚌 Conductor Misconduct</button>
+          <button class="type-btn" onclick="selectType(this)">⚠️ Other</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date of Incident *</label>
+          <input type="date" id="incDate">
+        </div>
+        <div class="form-group">
+          <label>Approx. Time</label>
+          <input type="time" id="incTime">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Transport Type *</label>
+        <select id="transportType">
+          <option value="">Select transport type…</option>
+          <option>Public Bus (SLTB)</option>
+          <option>Private Bus</option>
+          <option>Sri Lanka Railways (Train)</option>
+          <option>Three-Wheeler (Tuk Tuk)</option>
+          <option>Inter-Provincial Bus</option>
+          <option>School Van / Transport</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Route / Location</label>
+        <input type="text" id="routeInput" placeholder="e.g. Colombo Fort → Kandy, or Bus Route 138">
+      </div>
+
+      <div class="form-group">
+        <label>Vehicle Number (if known)</label>
+        <input type="text" id="vehicleNum" placeholder="e.g. WP-AB-1234">
+      </div>
+
+      <div class="form-group">
+        <label>Describe What Happened *</label>
+        <textarea id="description" placeholder="Describe the incident in as much detail as you're comfortable sharing. What happened, who was involved, any witnesses?"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name (Optional)</label>
+          <input type="text" id="yourName" placeholder="Anonymous if left blank">
+        </div>
+        <div class="form-group">
+          <label>Contact Number (Optional)</label>
+          <input type="tel" id="yourPhone" placeholder="For follow-up only">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Forward to Authority</label>
+        <select id="authority">
+          <option>National Transport Commission (NTC) — 1955</option>
+          <option>Sri Lanka Police — CWB (011-2444444)</option>
+          <option>Sri Lanka Railways</option>
+          <option>Women In Need (WIN) — Counselling</option>
+          <option>All relevant authorities</option>
+        </select>
+      </div>
+
+      <button class="submit-btn" onclick="submitReport()">📤 Submit Complaint Securely</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPORT INFO -->
+<section class="transport-section" id="transport">
+  <div class="max-w center reveal">
+    <span class="section-tag">Transport Safety Guide</span>
+    <h2 class="section-title">Know Your Route,<br>Know Your Rights</h2>
+    <p class="section-sub" style="margin:0 auto">Different transport types have different reporting channels. Here's what you need to know for each.</p>
+  </div>
+
+  <div class="transport-cards reveal">
+    <div class="transport-card">
+      <span class="t-emoji">🚌</span>
+      <div class="t-name">Public Bus (SLTB)</div>
+      <div class="t-info">Sri Lanka Transport Board buses. Dedicated women-only seats in some routes. Always note the bus number displayed at front.</div>
+      <span class="t-risk risk-high">High Risk</span>
+    </div>
+    <div class="transport-card">
+      <span class="t-emoji">🚐</span>
+      <div class="t-name">Private Bus</div>
+      <div class="t-info">Report to NTC on 1955. Note bus number, route number, and conductor's details. NTC takes disciplinary action weekly.</div>
+      <span class="t-risk risk-high">High Risk</span>
+    </div>
+    <div class="transport-card">
+      <span class="t-emoji">🚆</span>
+      <div class="t-name">Sri Lanka Railways</div>
+      <div class="t-info">Use designated women's compartments where available. Report incidents to the nearest station master or call Police CWB.</div>
+      <span class="t-risk risk-medium">Medium Risk</span>
+    </div>
+    <div class="transport-card">
+      <span class="t-emoji">🛺</span>
+      <div class="t-name">Three-Wheeler</div>
+      <div class="t-info">Always photograph the vehicle number before boarding. Use the 2SIX4 app to share location with trusted contacts in real time.</div>
+      <span class="t-risk risk-medium">Medium Risk</span>
+    </div>
+    <div class="transport-card">
+      <span class="t-emoji">📱</span>
+      <div class="t-name">2SIX4 Safety App</div>
+      <div class="t-info">Free app by Women In Need. One-tap SOS to contacts, connects to nearest police station & Women's Bureau. Download now.</div>
+      <span class="t-risk risk-low">Recommended</span>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR RIGHTS -->
+<section class="rights-section" id="rights">
+  <div class="max-w center reveal">
+    <span class="section-tag">Legal Protections</span>
+    <h2 class="section-title">Know Your Legal Rights</h2>
+    <p class="section-sub" style="margin:0 auto">Sri Lanka has laws to protect you. Understanding them empowers you to act with confidence.</p>
+  </div>
+
+  <div class="rights-grid mt-3 reveal">
+    <div class="right-card">
+      <div class="right-title">⚖️ Penal Code Section 345</div>
+      <div class="right-body">Sexual harassment is a criminal offence under Section 345 of the Sri Lanka Penal Code. It covers harassment using assault, criminal force, or words/actions that cause annoyance. Perpetrators can be arrested and prosecuted.</div>
+    </div>
+    <div class="right-card">
+      <div class="right-title">🛡️ Right to Complain Anonymously</div>
+      <div class="right-body">You have the right to file a complaint without revealing your identity. The NTC accepts anonymous reports via email at chairman@ntc.gov.lk. The Police CWB also protects your identity during investigation.</div>
+    </div>
+    <div class="right-card">
+      <div class="right-title">🏥 Right to Counselling</div>
+      <div class="right-body">You are entitled to free psychological counselling through Women In Need (WIN) Sri Lanka. Trauma counselling is available regardless of whether you file a formal police complaint.</div>
+    </div>
+    <div class="right-card">
+      <div class="right-title">📋 Right to Legal Representation</div>
+      <div class="right-body">WIN Sri Lanka provides free legal services to survivors of gender-based violence, including representation in court. You do not need to face the legal process alone.</div>
+    </div>
+    <div class="right-card">
+      <div class="right-title">🚫 Right Against Victim Blaming</div>
+      <div class="right-body">No officer has the right to question your clothing, behaviour, or choices in a way that implies fault. If you experience this from police, you can escalate your complaint to the DIG in charge of the CWB.</div>
+    </div>
+    <div class="right-card">
+      <div class="right-title">🏠 Emergency Shelter Rights</div>
+      <div class="right-body">If you feel unsafe at home due to retaliation after reporting, WIN Sri Lanka provides emergency shelter. Call their 24-hour hotline at 011-7762517 to access this service confidentially.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--rose);letter-spacing:2px;margin-bottom:0.5rem">SafeTravel LK</div>
+  <p>A women's safety platform for Sri Lanka's public transport network.</p>
+  <p style="margin-top:0.5rem">
+    <strong>Police Emergency:</strong> 119 &nbsp;|&nbsp;
+    <strong>CWB Hotline:</strong> 011-2444444 &nbsp;|&nbsp;
+    <strong>NTC:</strong> 1955 &nbsp;|&nbsp;
+    <strong>Women's Helpline:</strong> 1938 &nbsp;|&nbsp;
+    <strong>WIN:</strong> 011-7762517
+  </p>
+  <p style="margin-top:1.5rem;opacity:0.5;font-size:0.75rem">
+    Statistics source: UNFPA Sri Lanka · Designed for public awareness · Not an official government platform<br>
+    For official complaints visit <a href="https://www.police.lk" target="_blank">police.lk</a> or <a href="https://www.ntc.gov.lk" target="_blank">ntc.gov.lk</a>
+  </p>
+</footer>
+
+<!-- SOS MODAL -->
+<div class="sos-overlay" id="sosOverlay" onclick="closeSOS(event)">
+  <div class="sos-modal">
+    <div class="sos-pulse">🆘</div>
+    <div class="sos-title">Emergency Numbers</div>
+    <div class="sos-sub">Tap a number to call immediately</div>
+    <ul class="sos-numbers">
+      <li><span>🚨 Police Emergency</span>             <a href="tel:119">119</a></li>
+      <li><span>👮 CWB (Children & Women)</span>       <a href="tel:0112444444">011-2444444</a></li>
+      <li><span>🚌 NTC Transport Hotline</span>         <a href="tel:1955">1955</a></li>
+      <li><span>💜 Women's Help Line</span>             <a href="tel:1938">1938</a></li>
+      <li><span>🤝 Women In Need (WIN)</span>           <a href="tel:0117762517">011-7762517</a></li>
+      <li><span>🆘 CWB Emergency</span>                <a href="tel:109">109</a></li>
+    </ul>
+    <button class="sos-close" onclick="document.getElementById('sosOverlay').classList.remove('open')">✕ Close</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Your complaint has been submitted. Reference ID: <strong id="refId"></strong></div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Type buttons
+  function selectType(btn) {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // SOS
+  function openSOS() { document.getElementById('sosOverlay').classList.add('open'); }
+  function closeSOS(e) {
+    if (e.target === document.getElementById('sosOverlay'))
+      document.getElementById('sosOverlay').classList.remove('open');
+  }
+
+  // Submit
+  function submitReport() {
+    const required = [
+      { id: 'incDate',       label: 'Date of Incident' },
+      { id: 'transportType', label: 'Transport Type' },
+      { id: 'description',   label: 'Description' }
+    ];
+    for (const f of required) {
+      const el = document.getElementById(f.id);
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--rose)';
+        el.focus();
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      el.style.borderColor = '';
+    }
+    if (!document.querySelector('.type-btn.active')) {
+      document.getElementById('incidentTypeGroup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const refId = 'SL-' + Date.now().toString(36).toUpperCase().slice(-6);
+    document.getElementById('refId').textContent = refId;
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 5000);
+
+    // Reset form
+    ['incDate','incTime','routeInput','vehicleNum','description','yourName','yourPhone'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('transportType').value = '';
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  }
+
+  // Set today as default date
+  document.getElementById('incDate').valueAsDate = new Date();
+</script>
+</body>
+</html>
